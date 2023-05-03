@@ -1,47 +1,45 @@
-import { observer } from "mobx-react-lite"
-import React, { FC, useEffect, useMemo, useRef, useState } from "react"
-import { TextInput, TextStyle, ViewStyle } from "react-native"
-import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
-import { useStores } from "../models"
-import { AppStackScreenProps } from "../navigators"
-import { colors, spacing } from "../theme"
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { TextInput, TextStyle, ViewStyle } from 'react-native';
 
-interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
+import {
+  Button,
+  Icon,
+  Screen,
+  Text,
+  TextField,
+  TextFieldAccessoryProps,
+} from '../components';
+import { AppStackScreenProps } from '../navigators';
+import { colors, spacing } from '../theme';
 
-export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
-  const authPasswordInput = useRef<TextInput>()
+interface LoginScreenProps extends AppStackScreenProps<'Login'> {}
 
-  const [authPassword, setAuthPassword] = useState("")
-  const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [attemptsCount, setAttemptsCount] = useState(0)
-  const {
-    authenticationStore: { authEmail, setAuthEmail, setAuthToken, validationError },
-  } = useStores()
+export const LoginScreen: FC<LoginScreenProps> = function LoginScreen(_props) {
+  const authPasswordInput = useRef<TextInput>();
+
+  const [authPassword, setAuthPassword] = useState('');
+  const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [attemptsCount, setAttemptsCount] = useState(0);
 
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
-    setAuthEmail("ignite@infinite.red")
-    setAuthPassword("ign1teIsAwes0m3")
-  }, [])
+    setAuthPassword('ign1teIsAwes0m3');
+  }, []);
 
-  const error = isSubmitted ? validationError : ""
+  const error = isSubmitted;
 
   function login() {
-    setIsSubmitted(true)
-    setAttemptsCount(attemptsCount + 1)
-
-    if (validationError) return
+    setIsSubmitted(true);
+    setAttemptsCount(attemptsCount + 1);
 
     // Make a request to your server to get an authentication token.
     // If successful, reset the fields and set the token.
-    setIsSubmitted(false)
-    setAuthPassword("")
-    setAuthEmail("")
+    setIsSubmitted(false);
+    setAuthPassword('');
 
     // We'll mock this with a fake token.
-    setAuthToken(String(Date.now()))
   }
 
   const PasswordRightAccessory = useMemo(
@@ -49,37 +47,45 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       function PasswordRightAccessory(props: TextFieldAccessoryProps) {
         return (
           <Icon
-            icon={isAuthPasswordHidden ? "view" : "hidden"}
+            icon={isAuthPasswordHidden ? 'view' : 'hidden'}
             color={colors.palette.neutral800}
             containerStyle={props.style}
             size={20}
             onPress={() => setIsAuthPasswordHidden(!isAuthPasswordHidden)}
           />
-        )
+        );
       },
     [isAuthPasswordHidden],
-  )
+  );
 
   useEffect(() => {
     return () => {
-      setAuthPassword("")
-      setAuthEmail("")
-    }
-  }, [])
+      setAuthPassword('');
+    };
+  }, []);
 
   return (
     <Screen
       preset="auto"
       contentContainerStyle={$screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
+      safeAreaEdges={['top', 'bottom']}
     >
-      <Text testID="login-heading" tx="loginScreen.signIn" preset="heading" style={$signIn} />
-      <Text tx="loginScreen.enterDetails" preset="subheading" style={$enterDetails} />
-      {attemptsCount > 2 && <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />}
+      <Text
+        testID="login-heading"
+        tx="loginScreen.signIn"
+        preset="heading"
+        style={$signIn}
+      />
+      <Text
+        tx="loginScreen.enterDetails"
+        preset="subheading"
+        style={$enterDetails}
+      />
+      {attemptsCount > 2 && (
+        <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />
+      )}
 
       <TextField
-        value={authEmail}
-        onChangeText={setAuthEmail}
         containerStyle={$textField}
         autoCapitalize="none"
         autoComplete="email"
@@ -87,8 +93,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         keyboardType="email-address"
         labelTx="loginScreen.emailFieldLabel"
         placeholderTx="loginScreen.emailFieldPlaceholder"
-        helper={error}
-        status={error ? "error" : undefined}
+        status={error ? 'error' : undefined}
         onSubmitEditing={() => authPasswordInput.current?.focus()}
       />
 
@@ -115,33 +120,33 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         onPress={login}
       />
     </Screen>
-  )
-})
+  );
+};
 
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.huge,
   paddingHorizontal: spacing.large,
-}
+};
 
 const $signIn: TextStyle = {
   marginBottom: spacing.small,
-}
+};
 
 const $enterDetails: TextStyle = {
   marginBottom: spacing.large,
-}
+};
 
 const $hint: TextStyle = {
   color: colors.tint,
   marginBottom: spacing.medium,
-}
+};
 
 const $textField: ViewStyle = {
   marginBottom: spacing.large,
-}
+};
 
 const $tapButton: ViewStyle = {
   marginTop: spacing.extraSmall,
-}
+};
 
 // @demo remove-file
