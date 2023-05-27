@@ -14,6 +14,7 @@ import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
+import { useAppSelector } from 'app/hooks/useAppSelector';
 import * as Screens from 'app/screens';
 import React from 'react';
 import { useColorScheme } from 'react-native';
@@ -57,7 +58,7 @@ const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppStack = () => {
   // @demo remove-block-start
-  const isAuthenticated = false;
+  const isAuthenticated = useAppSelector(state => state.app.isLogged);
 
   // @demo remove-block-end
   return (

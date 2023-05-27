@@ -1,5 +1,7 @@
+import { appActions } from 'app/stores/persisted-app.store';
 import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { TextInput, TextStyle, ViewStyle } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import {
   Button,
@@ -15,6 +17,8 @@ import { colors, spacing } from '../theme';
 interface LoginScreenProps extends AppStackScreenProps<'Login'> {}
 
 export const LoginScreen: FC<LoginScreenProps> = function LoginScreen(_props) {
+  const dispatch = useDispatch();
+
   const authPasswordInput = useRef<TextInput>();
 
   const [authPassword, setAuthPassword] = useState('');
@@ -38,6 +42,8 @@ export const LoginScreen: FC<LoginScreenProps> = function LoginScreen(_props) {
     // If successful, reset the fields and set the token.
     setIsSubmitted(false);
     setAuthPassword('');
+
+    dispatch(appActions.setLogin());
 
     // We'll mock this with a fake token.
   }

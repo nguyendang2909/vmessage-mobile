@@ -1,5 +1,4 @@
-import { appStore } from 'store';
-
+import { appStore } from '../stores';
 import { ApiResponse } from './api-response.type';
 
 export declare namespace AppStore {

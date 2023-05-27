@@ -11,7 +11,7 @@ appId: com.vmessage # the app id of the app we want to test
 - launchApp # launches the app
 - assertVisible: "Sign In"
 - tapOn:
-    text: "Tap to sign in!"
+    text: "Sign in"
 - assertVisible: "Your app, almost ready for launch!"
 - tapOn:
     text: "Let's go!"

@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 
 import { AppStore } from '../types/app-store.type';
 import { apiSlice } from './api.store';
@@ -17,6 +16,9 @@ export const appSlice = createSlice({
     },
     removeLogged: state => {
       state.isLogged = false;
+    },
+    setLogin: state => {
+      state.isLogged = true;
     },
   },
   extraReducers: builder => {
