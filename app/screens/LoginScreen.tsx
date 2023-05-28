@@ -1,6 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import { appActions } from 'app/stores/persisted-app.store';
 import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
-import { TextInput, TextStyle, ViewStyle } from 'react-native';
+import { TextInput, TextStyle, View, ViewStyle } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import {
@@ -18,6 +19,8 @@ interface LoginScreenProps extends AppStackScreenProps<'Login'> {}
 
 export const LoginScreen: FC<LoginScreenProps> = function LoginScreen(_props) {
   const dispatch = useDispatch();
+
+  const { navigate } = useNavigation();
 
   const authPasswordInput = useRef<TextInput>();
 
@@ -48,6 +51,10 @@ export const LoginScreen: FC<LoginScreenProps> = function LoginScreen(_props) {
     // We'll mock this with a fake token.
   }
 
+  const signUp = () => {
+    navigate('RegisterByPhoneNumber');
+  };
+
   const PasswordRightAccessory = useMemo(
     () =>
       function PasswordRightAccessory(props: TextFieldAccessoryProps) {
@@ -76,55 +83,63 @@ export const LoginScreen: FC<LoginScreenProps> = function LoginScreen(_props) {
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={['top', 'bottom']}
     >
-      <Text
-        testID="login-heading"
-        tx="loginScreen.signIn"
-        preset="heading"
-        style={$signIn}
-      />
-      <Text
-        tx="loginScreen.enterDetails"
-        preset="subheading"
-        style={$enterDetails}
-      />
-      {attemptsCount > 2 && (
-        <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />
-      )}
+      <View style={$screenContent}>
+        <Text
+          testID="login-heading"
+          tx="loginScreen.signIn"
+          preset="heading"
+          style={$signIn}
+        />
 
-      <TextField
-        containerStyle={$textField}
-        autoCapitalize="none"
-        autoComplete="email"
-        autoCorrect={false}
-        keyboardType="email-address"
-        labelTx="loginScreen.emailFieldLabel"
-        placeholderTx="loginScreen.emailFieldPlaceholder"
-        status={error ? 'error' : undefined}
-        onSubmitEditing={() => authPasswordInput.current?.focus()}
-      />
+        <Text
+          tx="loginScreen.enterDetails"
+          preset="subheading"
+          style={$enterDetails}
+        />
 
-      <TextField
-        ref={authPasswordInput}
-        value={authPassword}
-        onChangeText={setAuthPassword}
-        containerStyle={$textField}
-        autoCapitalize="none"
-        autoComplete="password"
-        autoCorrect={false}
-        secureTextEntry={isAuthPasswordHidden}
-        labelTx="loginScreen.passwordFieldLabel"
-        placeholderTx="loginScreen.passwordFieldPlaceholder"
-        onSubmitEditing={login}
-        RightAccessory={PasswordRightAccessory}
-      />
+        <TextField
+          containerStyle={$textField}
+          autoCapitalize="none"
+          autoComplete="email"
+          autoCorrect={false}
+          keyboardType="email-address"
+          labelTx="loginScreen.emailFieldLabel"
+          placeholderTx="loginScreen.emailFieldPlaceholder"
+          status={error ? 'error' : undefined}
+          onSubmitEditing={() => authPasswordInput.current?.focus()}
+        />
 
-      <Button
-        testID="login-button"
-        tx="loginScreen.tapToSignIn"
-        style={$tapButton}
-        preset="reversed"
-        onPress={login}
-      />
+        <TextField
+          ref={authPasswordInput}
+          value={authPassword}
+          onChangeText={setAuthPassword}
+          containerStyle={$textField}
+          autoCapitalize="none"
+          autoComplete="password"
+          autoCorrect={false}
+          secureTextEntry={isAuthPasswordHidden}
+          labelTx="loginScreen.passwordFieldLabel"
+          placeholderTx="loginScreen.passwordFieldPlaceholder"
+          onSubmitEditing={login}
+          RightAccessory={PasswordRightAccessory}
+        />
+
+        <Button
+          testID="login-button"
+          tx="loginScreen.tapToSignIn"
+          style={$tapButton}
+          preset="reversed"
+          onPress={login}
+        />
+      </View>
+      <View style={$screenFooter}>
+        <Button
+          testID="sign-up-button"
+          tx="Sign up"
+          style={$signUpButton}
+          onPress={signUp}
+        />
+      </View>
     </Screen>
   );
 };
@@ -132,7 +147,16 @@ export const LoginScreen: FC<LoginScreenProps> = function LoginScreen(_props) {
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.huge,
   paddingHorizontal: spacing.large,
+  height: '100%',
+  display: 'flex',
+  backgroundColor: colors.primary,
 };
+
+const $screenContent: ViewStyle = {
+  flexGrow: 1,
+};
+
+const $screenFooter: ViewStyle = {};
 
 const $signIn: TextStyle = {
   marginBottom: spacing.small,
@@ -153,6 +177,16 @@ const $textField: ViewStyle = {
 
 const $tapButton: ViewStyle = {
   marginTop: spacing.extraSmall,
+};
+
+const $signUpButton: ViewStyle = {};
+
+const $signUpView: ViewStyle = {
+  marginTop: spacing.massive,
+};
+
+const $registerText: TextStyle = {
+  textAlign: 'right',
 };
 
 // @demo remove-file

@@ -11,5 +11,7 @@ export const API_URL = {
   messages: 'messages',
   myProfile: '/users/my-profile',
   myGallery: '/gallery/my',
+  registerCan: '/auth/register/can-register',
+  registerByPhoneNumber: '/auth/register/phone-number',
   users: '/users',
 };

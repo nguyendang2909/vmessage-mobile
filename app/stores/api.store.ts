@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import Config from 'app/config';
 import queryString from 'query-string';
-import Config from 'react-native-config';
 
 import { API_URL } from '../config/config.api';
 import { ApiRequest } from '../types/api-request.type';
@@ -24,9 +24,29 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
-  tagTypes: ['MyProfile', 'UNAUTHORIZED', 'UNKNOWN_ERROR'],
+  tagTypes: ['MyProfile', 'Register', 'UNAUTHORIZED', 'UNKNOWN_ERROR'],
   endpoints: builder => ({
     // Auth api
+    canRegister: builder.mutation<
+      ApiResponse.CanRegister,
+      ApiRequest.CanRegister
+    >({
+      query: body => ({
+        url: API_URL.registerCan,
+        method: 'POST',
+        body,
+      }),
+    }),
+    registerByPhoneNumber: builder.mutation<
+      ApiResponse.Logged,
+      ApiRequest.RegisterByPhoneNumber
+    >({
+      query: body => ({
+        url: API_URL.registerByPhoneNumber,
+        method: 'POST',
+        body,
+      }),
+    }),
     loginByEmail: builder.mutation<ApiResponse.Logged, ApiRequest.LoginByEmail>(
       {
         query: body => ({
@@ -67,52 +87,52 @@ export const apiSlice = createApi({
       }),
     }),
     // User api
-    getNearbyUsers: builder.query<ApiResponse.UserData[], void>({
-      query: () => ({
-        url: API_URL.nearbyUsers,
-        method: 'GET',
-        params: {
-          fields: [
-            '_id',
-            '_interestIds',
-            'about',
-            'age',
-            'avatar',
-            'birthdate',
-            'distance',
-            'dringking',
-            'company',
-            'educationLevel',
-            'email',
-            'gallery',
-            'gender',
-            'geolocation',
-            'jobTitle',
-            'interests',
-            'location',
-            'lookingForGender',
-            'nickname',
-            'role',
-            'school',
-            'smoking',
-            'workout',
-            'createdAt',
-            'updatedAt',
-          ],
-        },
-      }),
-      providesTags: (result, error, id) => {
-        if (result) {
-          return ['MyProfile'];
-        }
+    // getNearbyUsers: builder.query<ApiResponse.UserData[], void>({
+    //   query: () => ({
+    //     url: API_URL.nearbyUsers,
+    //     method: 'GET',
+    //     params: {
+    //       fields: [
+    //         '_id',
+    //         '_interestIds',
+    //         'about',
+    //         'age',
+    //         'avatar',
+    //         'birthdate',
+    //         'distance',
+    //         'dringking',
+    //         'company',
+    //         'educationLevel',
+    //         'email',
+    //         'gallery',
+    //         'gender',
+    //         'geolocation',
+    //         'jobTitle',
+    //         'interests',
+    //         'location',
+    //         'lookingForGender',
+    //         'nickname',
+    //         'role',
+    //         'school',
+    //         'smoking',
+    //         'workout',
+    //         'createdAt',
+    //         'updatedAt',
+    //       ],
+    //     },
+    //   }),
+    //   providesTags: (result, error, id) => {
+    //     if (result) {
+    //       return ['MyProfile'];
+    //     }
 
-        if (error?.status === 401) {
-          return ['UNAUTHORIZED'];
-        }
+    //     if (error?.status === 401) {
+    //       return ['UNAUTHORIZED'];
+    //     }
 
-        return ['UNKNOWN_ERROR'];
-      },
-    }),
+    //     return ['UNKNOWN_ERROR'];
+    //   },
+    // }),
     getMyProfile: builder.query<ApiResponse.UserData, void>({
       query: () => ({
         url: API_URL.myProfile,
@@ -158,17 +178,17 @@ export const apiSlice = createApi({
         return ['UNKNOWN_ERROR'];
       },
     }),
-    updateProfile: builder.mutation<
-      ApiResponse.UserData,
-      ApiRequest.UpdateProfile
-    >({
-      query: body => ({
-        url: API_URL.myProfile,
-        method: 'PATCH',
-        body,
-      }),
-      invalidatesTags: ['MyProfile'],
-    }),
+    // updateProfile: builder.mutation<
+    //   ApiResponse.UserData,
+    //   ApiRequest.UpdateProfile
+    // >({
+    //   query: body => ({
+    //     url: API_URL.myProfile,
+    //     method: 'PATCH',
+    //     body,
+    //   }),
+    //   invalidatesTags: ['MyProfile'],
+    // }),
     // Data interest
     getDataInterests: builder.query<
       ApiResponse.FetchData<ApiResponse.DataInterest[]>,

@@ -121,6 +121,16 @@ const en = {
         'No favorites have been added yet. Tap the heart on an episode to add it to your favorites!',
     },
   },
+  'Enter your phone number': 'Enter your phone number',
+  'Enter your first name': 'Enter your first name',
+  'Enter your last name': 'Enter your last name',
+  'First name': 'First name',
+  'Last name': 'Last name',
+  Next: 'Next',
+  Password: 'Password',
+  'Phone number': 'Phone number',
+  'Retype password': 'Retype password',
+  'Sign up': 'Sign up',
   // @demo remove-block-end
 };
 

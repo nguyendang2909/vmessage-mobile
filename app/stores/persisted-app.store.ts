@@ -15,37 +15,32 @@ export const appSlice = createSlice({
       state.accessToken = action.payload.accessToken;
     },
     removeLogged: state => {
-      state.isLogged = false;
-    },
-    setLogin: state => {
-      state.isLogged = true;
+      state.accessToken = undefined;
     },
   },
   extraReducers: builder => {
-    builder.addMatcher(
-      apiSlice.endpoints.loginByGoogle.matchFulfilled,
-      (state, action) => {
-        const accessToken = action.payload.data?.accessToken;
+    // builder.addMatcher(
+    //   apiSlice.endpoints.loginByGoogle.matchFulfilled,
+    //   (state, action) => {
+    //     const accessToken = action.payload.data?.accessToken;
 
-        if (accessToken) {
-          state.accessToken = action.payload.data?.accessToken;
+    //     if (accessToken) {
+    //       state.accessToken = action.payload.data?.accessToken;
 
-          state.isLogged = true;
-        }
-      },
-    );
-    builder.addMatcher(
-      apiSlice.endpoints.loginByFacebook.matchFulfilled,
-      (state, action) => {
-        const accessToken = action.payload.data?.accessToken;
+    //     }
+    //   },
+    // );
+    // builder.addMatcher(
+    //   apiSlice.endpoints.loginByFacebook.matchFulfilled,
+    //   (state, action) => {
+    //     const accessToken = action.payload.data?.accessToken;
 
-        if (accessToken) {
-          state.accessToken = action.payload.data?.accessToken;
+    //     if (accessToken) {
+    //       state.accessToken = action.payload.data?.accessToken;
 
-          state.isLogged = true;
-        }
-      },
-    );
+    //     }
+    //   },
+    // );
     builder.addMatcher(
       apiSlice.endpoints.loginByPhoneNumber.matchFulfilled,
       (state, action) => {
@@ -53,17 +48,27 @@ export const appSlice = createSlice({
 
         if (accessToken) {
           state.accessToken = action.payload.data?.accessToken;
-
-          state.isLogged = true;
         }
       },
     );
     builder.addMatcher(
-      apiSlice.endpoints.getMyProfile.matchFulfilled,
+      apiSlice.endpoints.registerByPhoneNumber.matchFulfilled,
       (state, action) => {
-        state.isLogged = true;
+        const accessToken = action.payload.data?.accessToken;
+        console.log(111, action.payload.data);
+        if (!accessToken) {
+          return;
+        }
+
+        state.accessToken = accessToken;
       },
     );
+    // builder.addMatcher(
+    //   apiSlice.endpoints.getMyProfile.matchFulfilled,
+    //   (state, action) => {
+    //     state.isLogged = true;
+    //   },
+    // );
   },
 });
 

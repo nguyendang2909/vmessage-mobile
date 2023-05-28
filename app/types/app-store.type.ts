@@ -6,7 +6,6 @@ export declare namespace AppStore {
 
   type PersistedAppState = Partial<{
     accessToken?: string;
-    isLogged?: boolean;
   }>;
 
   type CurrentUser = Partial<{

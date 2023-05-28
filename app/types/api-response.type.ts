@@ -28,6 +28,8 @@ export declare namespace ApiResponse {
     isActive?: boolean;
   };
 
+  type CanRegister = FetchData<{ phoneNumber?: string; canRegister: boolean }>;
+
   type MediaFile = BaseEntity & Partial<{ url: string }>;
 
   type User = BaseEntity &

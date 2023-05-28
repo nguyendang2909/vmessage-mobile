@@ -25,6 +25,17 @@ export declare namespace ApiRequest {
 
   type FindManyByLastId<T> = PaginationByLastId & T;
 
+  type CanRegister = {
+    phoneNumber: string;
+  };
+
+  type RegisterByPhoneNumber = {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    token: string;
+  };
+
   type LoginByEmail = {
     email: string;
     password: string;
