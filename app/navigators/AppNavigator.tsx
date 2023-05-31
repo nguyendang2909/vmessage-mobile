@@ -16,8 +16,10 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks/useAppSelector';
-import * as Screens from 'app/screens';
-import { RegisterOtpPhoneNumberScreen } from 'app/screens/RegisterOtpPhoneNumberScreen';
+import { SignInScreen } from 'app/screens/SignInScreen';
+import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
+import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
+import { WelcomeScreen } from 'app/screens/WelcomeScreen';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
@@ -40,17 +42,15 @@ import { navigationRef, useBackButtonHandler } from './navigationUtilities';
  */
 export type AppStackParamList = {
   Welcome: undefined;
-  Login: undefined;
   Demo: NavigatorScreenParams<DemoTabParamList>;
-  RegisterByPhoneNumber: undefined;
-  RegisterOtpPhoneNumber: {
+  SignInWithPhoneNumber: undefined;
+  SignInWithOtpPhoneNumber: {
     otpConfirm: FirebaseAuthTypes.ConfirmationResult;
     user: {
-      firstName: string;
-      lastName: string;
       phoneNumber: string;
     };
   };
+  SignIn: undefined;
 };
 
 /**
@@ -71,24 +71,23 @@ const AppStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={isAuthenticated ? 'Welcome' : 'Login'} // @demo remove-current-line
+      initialRouteName={isAuthenticated ? 'Welcome' : 'SignIn'} // @demo remove-current-line
     >
       {isAuthenticated ? (
         <>
-          <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
-
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="Demo" component={DemoNavigator} />
         </>
       ) : (
         <>
-          <Stack.Screen name="Login" component={Screens.LoginScreen} />
+          <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen
-            name="RegisterByPhoneNumber"
-            component={Screens.RegisterByPhoneNumberScreen}
+            name="SignInWithPhoneNumber"
+            component={SignInWithPhoneNumberScreen}
           />
           <Stack.Screen
-            name="RegisterOtpPhoneNumber"
-            component={RegisterOtpPhoneNumberScreen}
+            name="SignInWithOtpPhoneNumber"
+            component={SignInWithOtpPhoneNumberScreen}
           />
         </>
       )}

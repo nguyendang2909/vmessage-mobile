@@ -17,6 +17,9 @@ export const appSlice = createSlice({
     removeLogged: state => {
       state.accessToken = undefined;
     },
+    logout: state => {
+      state.accessToken = undefined;
+    },
   },
   extraReducers: builder => {
     // builder.addMatcher(
@@ -41,21 +44,20 @@ export const appSlice = createSlice({
     //     }
     //   },
     // );
-    builder.addMatcher(
-      apiSlice.endpoints.loginByPhoneNumber.matchFulfilled,
-      (state, action) => {
-        const accessToken = action.payload.data?.accessToken;
+    // builder.addMatcher(
+    //   apiSlice.endpoints.loginByPhoneNumber.matchFulfilled,
+    //   (state, action) => {
+    //     const accessToken = action.payload.data?.accessToken;
 
-        if (accessToken) {
-          state.accessToken = action.payload.data?.accessToken;
-        }
-      },
-    );
+    //     if (accessToken) {
+    //       state.accessToken = action.payload.data?.accessToken;
+    //     }
+    //   },
+    // );
     builder.addMatcher(
-      apiSlice.endpoints.registerByPhoneNumber.matchFulfilled,
+      apiSlice.endpoints.signInWithPhoneNumber.matchFulfilled,
       (state, action) => {
         const accessToken = action.payload.data?.accessToken;
-        console.log(111, action.payload.data);
         if (!accessToken) {
           return;
         }

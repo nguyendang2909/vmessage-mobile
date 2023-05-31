@@ -25,14 +25,11 @@ export declare namespace ApiRequest {
 
   type FindManyByLastId<T> = PaginationByLastId & T;
 
-  type CanRegister = {
+  type IsExistUser = {
     phoneNumber: string;
   };
 
-  type RegisterByPhoneNumber = {
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
+  type SignInWithPhoneNumber = {
     token: string;
   };
 

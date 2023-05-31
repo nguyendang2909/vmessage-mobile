@@ -27,65 +27,65 @@ export const apiSlice = createApi({
   tagTypes: ['MyProfile', 'Register', 'UNAUTHORIZED', 'UNKNOWN_ERROR'],
   endpoints: builder => ({
     // Auth api
-    canRegister: builder.mutation<
-      ApiResponse.CanRegister,
-      ApiRequest.CanRegister
+    isExistUser: builder.mutation<
+      ApiResponse.IsExistUser,
+      ApiRequest.IsExistUser
     >({
       query: body => ({
-        url: API_URL.registerCan,
+        url: API_URL.isExistUser,
         method: 'POST',
         body,
       }),
     }),
-    registerByPhoneNumber: builder.mutation<
+    signInWithPhoneNumber: builder.mutation<
       ApiResponse.Logged,
-      ApiRequest.RegisterByPhoneNumber
+      ApiRequest.SignInWithPhoneNumber
     >({
       query: body => ({
-        url: API_URL.registerByPhoneNumber,
+        url: API_URL.signInWithPhoneNumber,
         method: 'POST',
         body,
       }),
     }),
-    loginByEmail: builder.mutation<ApiResponse.Logged, ApiRequest.LoginByEmail>(
-      {
-        query: body => ({
-          url: API_URL.loginByEmail,
-          method: 'POST',
-          body,
-        }),
-      },
-    ),
-    loginByGoogle: builder.mutation<
-      ApiResponse.Logged,
-      ApiRequest.LoginByGoogle
-    >({
-      query: body => ({
-        url: API_URL.loginByGoogle,
-        method: 'POST',
-        body,
-      }),
-    }),
-    loginByFacebook: builder.mutation<
-      ApiResponse.Logged,
-      ApiRequest.LoginByFacebook
-    >({
-      query: body => ({
-        url: API_URL.loginByFacebook,
-        method: 'POST',
-        body,
-      }),
-    }),
-    loginByPhoneNumber: builder.mutation<
-      ApiResponse.Logged,
-      ApiRequest.LoginByPhoneNumber
-    >({
-      query: body => ({
-        url: API_URL.loginByPhoneNumber,
-        method: 'POST',
-        body,
-      }),
-    }),
+    // loginByEmail: builder.mutation<ApiResponse.Logged, ApiRequest.LoginByEmail>(
+    //   {
+    //     query: body => ({
+    //       url: API_URL.loginByEmail,
+    //       method: 'POST',
+    //       body,
+    //     }),
+    //   },
+    // ),
+    // loginByGoogle: builder.mutation<
+    //   ApiResponse.Logged,
+    //   ApiRequest.LoginByGoogle
+    // >({
+    //   query: body => ({
+    //     url: API_URL.loginByGoogle,
+    //     method: 'POST',
+    //     body,
+    //   }),
+    // }),
+    // loginByFacebook: builder.mutation<
+    //   ApiResponse.Logged,
+    //   ApiRequest.LoginByFacebook
+    // >({
+    //   query: body => ({
+    //     url: API_URL.loginByFacebook,
+    //     method: 'POST',
+    //     body,
+    //   }),
+    // }),
+    // loginByPhoneNumber: builder.mutation<
+    //   ApiResponse.Logged,
+    //   ApiRequest.LoginByPhoneNumber
+    // >({
+    //   query: body => ({
+    //     url: API_URL.loginByPhoneNumber,
+    //     method: 'POST',
+    //     body,
+    //   }),
+    // }),
     // User api
     // getNearbyUsers: builder.query<ApiResponse.UserData[], void>({
     //   query: () => ({

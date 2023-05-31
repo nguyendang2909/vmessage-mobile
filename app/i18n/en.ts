@@ -130,7 +130,8 @@ const en = {
   Password: 'Password',
   'Phone number': 'Phone number',
   'Retype password': 'Retype password',
-  'Sign up': 'Sign up',
+  'Sign in with phone number': 'Sign in with phone number',
+  'Sign in': 'Sign in',
   // @demo remove-block-end
 };
 

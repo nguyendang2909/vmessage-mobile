@@ -8,13 +8,12 @@ import { Keyboard, Pressable, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { AppStackScreenProps } from '../navigators';
 
-interface ScreenProps extends AppStackScreenProps<'RegisterOtpPhoneNumber'> {}
+interface FCProps extends AppStackScreenProps<'SignInWithOtpPhoneNumber'> {}
 
-export const RegisterOtpPhoneNumberScreen: FC<ScreenProps> = props => {
+export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const maximumCodeLength = 6;
 
-  const [submitRegisterByPhoneNumber] =
-    apiSlice.useRegisterByPhoneNumberMutation();
+  const [submitSignInPhoneNumber] = apiSlice.useSignInWithPhoneNumberMutation();
 
   const [otpCode, setOTPCode] = useState('');
 
@@ -29,7 +28,7 @@ export const RegisterOtpPhoneNumberScreen: FC<ScreenProps> = props => {
 
     const idToken = await credential.user.getIdToken();
 
-    await submitRegisterByPhoneNumber({
+    await submitSignInPhoneNumber({
       ...user,
       token: idToken,
     }).unwrap();
@@ -56,7 +55,7 @@ export const RegisterOtpPhoneNumberScreen: FC<ScreenProps> = props => {
             // preset="reversed"
             onPress={handleSignUp}
           >
-            {translate('Sign up')}
+            {translate('Sign in')}
           </Button>
         </View>
       </View>
