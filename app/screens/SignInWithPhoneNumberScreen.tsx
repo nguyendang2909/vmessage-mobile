@@ -1,32 +1,29 @@
 import { SignInWithPhoneNumberForm } from 'app/containers/Form/SignInWithPhoneNumberForm';
+import { heightFull } from 'app/styles/height';
+import { justifyContentCenter } from 'app/styles/justifyContent';
 import { paddingHorizontal } from 'app/styles/padding';
-import { View } from 'native-base';
+import { Box } from 'native-base';
 import React, { FC } from 'react';
 
-import { Header, Screen } from '../components';
-import { AppStackScreenProps, goBack } from '../navigators';
-import { colors, spacing } from '../theme';
+import { AppStackScreenProps } from '../navigators';
+import { spacing } from '../theme';
 
 interface FCProps extends AppStackScreenProps<'SignInWithPhoneNumber'> {}
 
 export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
   return (
     <>
-      <Header
-        backgroundColor={colors.primary}
-        titleMode="flex"
-        leftText="Sign up"
-        leftIcon="back"
-        onLeftPress={() => {
-          goBack();
-        }}
-      ></Header>
-
-      <Screen preset="auto" safeAreaEdges={['top', 'bottom']}>
-        <View style={paddingHorizontal(spacing.large)}>
-          <SignInWithPhoneNumberForm />
-        </View>
-      </Screen>
+      <Box
+        safeAreaTop
+        safeAreaBottom
+        style={[
+          heightFull,
+          paddingHorizontal(spacing.large),
+          justifyContentCenter,
+        ]}
+      >
+        <SignInWithPhoneNumberForm />
+      </Box>
     </>
   );
 };

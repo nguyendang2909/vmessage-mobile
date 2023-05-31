@@ -55,7 +55,12 @@ export const SignInWithPhoneNumberForm: FC = () => {
       </View>
 
       <View>
-        <Button onPress={() => formik.handleSubmit()}>Next</Button>
+        <Button
+          onPress={() => formik.handleSubmit()}
+          isLoading={formik.isSubmitting}
+        >
+          Next
+        </Button>
       </View>
     </View>
   );
