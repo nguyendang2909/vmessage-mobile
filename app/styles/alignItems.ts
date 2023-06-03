@@ -1,3 +1,3 @@
 import { ViewStyle } from 'react-native';
 
-export const alignItemCenter: ViewStyle = { alignItems: 'center' };
+export const alignItemsCenter: ViewStyle = { alignItems: 'center' };

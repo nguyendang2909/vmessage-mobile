@@ -28,6 +28,7 @@ import { ErrorBoundary } from './screens/ErrorScreen/ErrorBoundary';
 import { setupReactotron } from './services/reactotron';
 import { appStore } from './stores';
 import { customFontsToLoad } from './theme';
+import { defaultTheme } from './theme/default-theme';
 import * as storage from './utils/storage';
 
 // Set up Reactotron, which is a free desktop app for inspecting and debugging
@@ -116,7 +117,7 @@ function App(props: AppProps) {
     <Provider store={appStore}>
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <ErrorBoundary catchErrors={Config.catchErrors}>
-          <NativeBaseProvider>
+          <NativeBaseProvider theme={defaultTheme}>
             <AppNavigator
               linking={linking}
               initialState={initialNavigationState}

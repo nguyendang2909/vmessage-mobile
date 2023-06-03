@@ -129,9 +129,11 @@ const en = {
   Next: 'Next',
   Password: 'Password',
   'Phone number': 'Phone number',
+  'Phone number is not valid!': 'Phone number is not valid!',
   'Retype password': 'Retype password',
   'Sign in with phone number': 'Sign in with phone number',
   'Sign in': 'Sign in',
+  vMessage: 'vMessage',
   // @demo remove-block-end
 };
 
