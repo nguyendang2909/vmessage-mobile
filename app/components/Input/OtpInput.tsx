@@ -1,6 +1,17 @@
+import { alignItemsCenter } from 'app/styles/alignItems';
+import { flexDirectionRow } from 'app/styles/flexDirection';
+import { fontSize } from 'app/styles/font-size';
+import {
+  justifyContentCenter,
+  justifyContentSpaceEvenly,
+} from 'app/styles/justifyContent';
+import { opacity } from 'app/styles/opacity';
+import { posititionAbsolute } from 'app/styles/position';
+import { textAlignCenter } from 'app/styles/text-align';
+import { widthFull } from 'app/styles/width';
 import { colors } from 'app/theme';
 import React, { FC, useRef, useState } from 'react';
-import { View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 import styled from 'styled-components/native';
 
 export type FCProps = {
@@ -10,51 +21,48 @@ export type FCProps = {
 };
 
 export const OtpInput: FC<FCProps> = ({ code, setCode, maximumLength = 6 }) => {
-  const inputRef = useRef();
-
+  const inputRef = useRef<any>();
   const [isInputBoxFocused, setIsInputBoxFocused] = useState(false);
-
   const boxArray = new Array(maximumLength).fill(0);
-
   const handleOnPress = () => {
     setIsInputBoxFocused(true);
     (inputRef as any).current.focus();
   };
-
   const handleOnBlur = () => {
     setIsInputBoxFocused(false);
   };
-
   const boxDigit = (_: number, index: number) => {
     const emptyInput = '';
     const digit = code[index] || emptyInput;
-
     const isCurrentValue = index === code.length;
     const isLastValue = index === maximumLength - 1;
     const isCodeComplete = code.length === maximumLength;
-
     const isValueFocused = isCurrentValue || (isLastValue && isCodeComplete);
-
     const StyledSplitBoxes =
       isInputBoxFocused && isValueFocused ? SplitBoxesFocused : SplitBoxes;
 
     return (
       <StyledSplitBoxes key={index}>
-        <SplitBoxText>{digit}</SplitBoxText>
+        <Text style={[fontSize(20), textAlignCenter]}>{digit}</Text>
       </StyledSplitBoxes>
     );
   };
 
-  const handleChangeText = text => {
+  const handleChangeText = (text: string) => {
     setCode(text.replace(/[^0-9]/g, ''));
   };
 
   return (
-    <OTPInputContainer>
-      <SplitOTPBoxesContainer onPress={handleOnPress}>
+    <View style={[alignItemsCenter, justifyContentCenter]}>
+      <Pressable
+        style={[flexDirectionRow, justifyContentSpaceEvenly, widthFull]}
+        onPress={handleOnPress}
+      >
         {boxArray.map(boxDigit)}
-      </SplitOTPBoxesContainer>
-      <TextInputHidden
+      </Pressable>
+      <TextInput
+        focusable={true}
+        style={[posititionAbsolute, opacity(0)]}
         keyboardType="numeric"
         value={code}
         onChangeText={handleChangeText}
@@ -62,33 +70,19 @@ export const OtpInput: FC<FCProps> = ({ code, setCode, maximumLength = 6 }) => {
         ref={inputRef}
         onBlur={handleOnBlur}
       />
-    </OTPInputContainer>
+    </View>
   );
 };
-
-export const OTPInputContainer = styled.View`
-  justify-content: center;
-  align-items: center;
-`;
-
-export const TextInputHidden = styled.TextInput`
-  position: absolute;
-  opacity: 0;
-`;
-
-export const SplitBoxText = styled.Text`
-  font-size: 20px;
-  text-align: center;
-`;
 
 export const SplitBoxes = styled(View)(() => ({
   borderColor: colors.primary,
   borderWidth: 2,
   borderRadius: 5,
-  padding: 12,
-  minWidth: 50,
-  minHeight: 50,
-  maxHeight: 50,
+  padding: 8,
+  minWidth: 40,
+  maxWidth: 40,
+  minHeight: 40,
+  maxHeight: 40,
   justifyContent: 'center',
   alignItems: 'center',
 }));
@@ -96,10 +90,4 @@ export const SplitBoxes = styled(View)(() => ({
 export const SplitBoxesFocused = styled(SplitBoxes)`
   border-color: #ecdbba;
   background-color: grey;
-`;
-
-export const SplitOTPBoxesContainer = styled.Pressable`
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-evenly;
 `;

@@ -124,7 +124,9 @@ const en = {
   'Enter your phone number': 'Enter your phone number',
   'Enter your first name': 'Enter your first name',
   'Enter your last name': 'Enter your last name',
+  'Error, please try again!': 'Error, please try again!',
   'First name': 'First name',
+  'Input OTP': 'Input OTP',
   'Last name': 'Last name',
   Next: 'Next',
   Password: 'Password',
@@ -134,6 +136,7 @@ const en = {
   'Sign in with phone number': 'Sign in with phone number',
   'Sign in': 'Sign in',
   vMessage: 'vMessage',
+  'Wrong OTP code, try again!': 'Wrong OTP code, try again!',
   // @demo remove-block-end
 };
 

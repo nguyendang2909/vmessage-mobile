@@ -7,15 +7,15 @@ import React, { FC } from 'react';
 type FCProps = {
   bg?: string;
   textTx?: TxKeyPath;
-  leftIcon?: JSX.Element;
-  leftIconOnPress?: () => void;
+  leftIcon?: FC<{ color: string }>;
+  onPressLeftIcon?: () => void;
 };
 
 export const Header: FC<FCProps> = ({
   bg,
   textTx,
-  leftIcon,
-  leftIconOnPress,
+  leftIcon: LeftIcon,
+  onPressLeftIcon,
 }) => {
   return (
     <View>
@@ -23,10 +23,14 @@ export const Header: FC<FCProps> = ({
       <Box bg={bg || colors.primary} style={{ minHeight: spacing.huge }}>
         <HStack>
           <HStack style={alignItemsCenter}>
-            {!!leftIcon && (
-              <IconButton icon={leftIcon} onPress={leftIconOnPress} />
+            {!!LeftIcon && (
+              <IconButton
+                color="white"
+                icon={<LeftIcon color="light" />}
+                onPress={onPressLeftIcon}
+              />
             )}
-            {!!textTx && <Text>{translate(textTx)}</Text>}
+            {!!textTx && <Text color="light">{translate(textTx)}</Text>}
           </HStack>
         </HStack>
       </Box>

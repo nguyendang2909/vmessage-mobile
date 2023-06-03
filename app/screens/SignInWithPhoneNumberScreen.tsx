@@ -21,8 +21,8 @@ export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
       <Box safeAreaBottom style={heightFull}>
         <Header
           textTx="Sign in with phone number"
-          leftIcon={<ChevronLeftIcon />}
-          leftIconOnPress={goBack}
+          leftIcon={ChevronLeftIcon}
+          onPressLeftIcon={goBack}
         />
         <Box
           style={[
