@@ -64,7 +64,11 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
 
           <Box style={[flexGrow, paddingHorizontal(spacing.large)]}>
             <View style={paddingVertical(spacing.large)}>
-              <Text>{translate('Please input the OTP code to sign in')}</Text>
+              <Text>
+                {translate(
+                  'Do not share verification code to protect your account',
+                )}
+              </Text>
             </View>
 
             <HStack space="2" style={paddingVertical(spacing.large)}>
@@ -75,7 +79,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
                   maximumLength={maximumCodeLength}
                 />
                 <FormControl.ErrorMessage>
-                  {isError && translate('Wrong OTP code, try again!')}
+                  {isError && translate('Wrong verification code, try again!')}
                 </FormControl.ErrorMessage>
               </FormControl>
             </HStack>

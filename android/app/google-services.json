@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "164052106729",
+    "project_id": "vmessage2909",
+    "storage_bucket": "vmessage2909.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164052106729:android:0d13191ce1b0cc75bb9f78",
+        "android_client_info": {
+          "package_name": "com.vmessage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164052106729-lueg73377m5u0r8a40bk9tonj0dmuab0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9kY966t10qzON_klViS5ljoBwIaX8fPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164052106729-lueg73377m5u0r8a40bk9tonj0dmuab0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "164052106729-enuc3v55aee4uqe1r2vh6rd19sefuha9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vmessage"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

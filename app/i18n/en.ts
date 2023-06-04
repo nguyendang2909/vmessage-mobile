@@ -122,6 +122,8 @@ const en = {
     },
   },
   Contacts: 'Contacts',
+  'Do not share verification code to protect your account':
+    'Do not share verification code to protect your account',
   'Enter your phone number': 'Enter your phone number',
   'Enter your first name': 'Enter your first name',
   'Enter your last name': 'Enter your last name',
@@ -142,7 +144,7 @@ const en = {
   'Sign in with phone number': 'Sign in with phone number',
   'Sign in': 'Sign in',
   vMessage: 'vMessage',
-  'Wrong OTP code, try again!': 'Wrong OTP code, try again!',
+  'Wrong verification code, try again!': 'Wrong verification code, try again!',
   // @demo remove-block-end
 };
 
