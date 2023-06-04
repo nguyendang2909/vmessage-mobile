@@ -1,13 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Icon } from 'app/components';
 import { translate } from 'app/i18n';
 import { AppStackScreenProps } from 'app/navigators';
 import { MessagesScreen } from 'app/screens/MessagesScreen';
 import { backgroundColor, borderTopColor } from 'app/styles';
 import { colors, spacing, typography } from 'app/theme';
-import { ChevronLeftIcon } from 'native-base';
 import React, { FC } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export type HomeTabParamList = {
   Messages: undefined;
@@ -52,9 +51,9 @@ export const HomeNavigator: FC<FCProps> = () => {
         options={{
           tabBarLabel: translate('Messages'),
           tabBarIcon: ({ focused }) => (
-            <Icon
-              icon="components"
-              color={focused ? colors.tint : ''}
+            <MaterialCommunityIcons
+              name="chat"
+              color={focused ? colors.primary : colors.palette.neutral500}
               size={30}
             />
           ),
@@ -66,7 +65,39 @@ export const HomeNavigator: FC<FCProps> = () => {
         options={{
           tabBarLabel: translate('Contacts'),
           tabBarIcon: ({ focused }) => (
-            <ChevronLeftIcon color={focused ? colors.primary : ''} size={30} />
+            <MaterialCommunityIcons
+              name="contacts"
+              color={focused ? colors.primary : colors.palette.neutral500}
+              size={30}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Notes"
+        component={MessagesScreen}
+        options={{
+          tabBarLabel: translate('Notes'),
+          tabBarIcon: ({ focused }) => (
+            <MaterialCommunityIcons
+              name="note"
+              color={focused ? colors.primary : colors.palette.neutral500}
+              size={30}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={MessagesScreen}
+        options={{
+          tabBarLabel: translate('Profile'),
+          tabBarIcon: ({ focused }) => (
+            <MaterialCommunityIcons
+              name="account"
+              color={focused ? colors.primary : colors.palette.neutral500}
+              size={30}
+            />
           ),
         }}
       />

@@ -133,6 +133,7 @@ const en = {
   'Last name': 'Last name',
   Messages: 'Messages',
   Next: 'Next',
+  Notes: 'Notes',
   Password: 'Password',
   'Phone number': 'Phone number',
   'Phone number is not valid!': 'Phone number is not valid!',
@@ -140,6 +141,7 @@ const en = {
     'Please input the phone number to sign in',
   'Please input the OTP code to sign in':
     'Please input the OTP code to sign in',
+  Profile: 'Profile',
   'Retype password': 'Retype password',
   'Sign in with phone number': 'Sign in with phone number',
   'Sign in': 'Sign in',
