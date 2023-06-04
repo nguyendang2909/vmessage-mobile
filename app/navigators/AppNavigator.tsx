@@ -16,15 +16,15 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks/useAppSelector';
+import { HomeNavigator, HomeTabParamList } from 'app/navigators/HomeNavigator';
 import { SignInScreen } from 'app/screens/SignInScreen';
 import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
 import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
-import { WelcomeScreen } from 'app/screens/WelcomeScreen';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
 import Config from '../config';
-import { DemoNavigator, DemoTabParamList } from './DemoNavigator'; // @demo remove-current-line
+import { DemoTabParamList } from './DemoNavigator'; // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from './navigationUtilities';
 
 /**
@@ -41,7 +41,7 @@ import { navigationRef, useBackButtonHandler } from './navigationUtilities';
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Welcome: undefined;
+  Home: NavigatorScreenParams<HomeTabParamList>;
   Demo: NavigatorScreenParams<DemoTabParamList>;
   SignInWithPhoneNumber: undefined;
   SignInWithOtpPhoneNumber: {
@@ -71,12 +71,12 @@ const AppStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={isAuthenticated ? 'Welcome' : 'SignIn'} // @demo remove-current-line
+      initialRouteName={isAuthenticated ? 'Demo' : 'SignIn'} // @demo remove-current-line
     >
       {isAuthenticated ? (
         <>
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
-          <Stack.Screen name="Demo" component={DemoNavigator} />
+          {/* <Stack.Screen name="Demo" component={DemoNavigator} /> */}
+          <Stack.Screen name="Home" component={HomeNavigator} />
         </>
       ) : (
         <>

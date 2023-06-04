@@ -1,8 +1,8 @@
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { translate } from 'app/i18n';
+import { translate, TxKeyPath } from 'app/i18n';
 import { phoneRegExp } from 'app/lib/validators';
-import { marginBottom } from 'app/styles/margin';
+import { marginBottom, marginTop } from 'app/styles/margin';
 import { spacing } from 'app/theme';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
@@ -13,11 +13,13 @@ import {
   View,
   WarningOutlineIcon,
 } from 'native-base';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
 export const SignInWithPhoneNumberForm: FC = () => {
   const { navigate } = useNavigation();
+
+  const [errorCode, setErrorCode] = useState<TxKeyPath | undefined>();
 
   function onAuthStateChanged(user: unknown) {
     if (user) {
@@ -45,37 +47,50 @@ export const SignInWithPhoneNumberForm: FC = () => {
       ),
     }),
     onSubmit: async values => {
-      const { phoneNumber } = values;
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      navigate('SignInWithOtpPhoneNumber', {
-        otpConfirm: confirmation,
-        user: { phoneNumber },
-      });
+      setErrorCode(undefined);
+      try {
+        const { phoneNumber } = values;
+        const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+        navigate('SignInWithOtpPhoneNumber', {
+          otpConfirm: confirmation,
+          user: { phoneNumber },
+        });
+      } catch (err) {
+        console.log(111, err);
+        setErrorCode('Error, please try again!');
+      }
     },
   });
+
+  console.log(errorCode);
+
+  const handlePressSubmit = () => {
+    formik.handleSubmit();
+  };
 
   return (
     <View>
       <View style={marginBottom(spacing.large)}>
-        <FormControl isInvalid={!!formik.errors.phoneNumber}>
+        <FormControl
+          isRequired
+          isInvalid={!!errorCode || !!formik.errors.phoneNumber}
+        >
           <FormControl.Label>{translate('Phone number')}</FormControl.Label>
           <Input
+            size="xl"
             testID="phoneNumber"
             onChangeText={formik.handleChange('phoneNumber')}
             placeholder={translate('Enter your phone number')}
             onBlur={formik.handleBlur('phoneNumber')}
           ></Input>
           <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-            {formik.errors.phoneNumber}
+            {(!!errorCode && translate(errorCode)) || formik.errors.phoneNumber}
           </FormControl.ErrorMessage>
         </FormControl>
       </View>
 
-      <View>
-        <Button
-          onPress={() => formik.handleSubmit()}
-          isLoading={formik.isSubmitting}
-        >
+      <View style={marginTop(spacing.large)}>
+        <Button onPress={handlePressSubmit} isLoading={formik.isSubmitting}>
           Next
         </Button>
       </View>

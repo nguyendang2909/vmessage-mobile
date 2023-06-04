@@ -1,11 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import { Header } from 'app/components/Screen/Header';
 import { SignInWithPhoneNumberForm } from 'app/containers/Form/SignInWithPhoneNumberForm';
+import { translate } from 'app/i18n';
 import { flexGrow } from 'app/styles/flex-grow';
 import { heightFull } from 'app/styles/height';
-import { justifyContentCenter } from 'app/styles/justifyContent';
-import { paddingHorizontal } from 'app/styles/padding';
-import { Box, ChevronLeftIcon } from 'native-base';
+import { marginTop } from 'app/styles/margin';
+import { paddingHorizontal, paddingVertical } from 'app/styles/padding';
+import { textAlignCenter } from 'app/styles/text-align';
+import { Box, ChevronLeftIcon, StatusBar, Text, View } from 'native-base';
 import React, { FC } from 'react';
 
 import { AppStackScreenProps } from '../navigators';
@@ -18,21 +20,30 @@ export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
 
   return (
     <>
+      <StatusBar barStyle="light-content" />
       <Box safeAreaBottom style={heightFull}>
         <Header
           textTx="Sign in with phone number"
           leftIcon={ChevronLeftIcon}
           onPressLeftIcon={goBack}
         />
-        <Box
+        <View
           style={[
-            flexGrow,
             paddingHorizontal(spacing.large),
-            justifyContentCenter,
+            paddingVertical(spacing.large),
           ]}
         >
-          <SignInWithPhoneNumberForm />
-        </Box>
+          <Text>{translate('Please input the phone number to sign in')}</Text>
+        </View>
+
+        <View style={[marginTop(spacing.large), flexGrow]}>
+          <View style={paddingHorizontal(spacing.large)}>
+            <SignInWithPhoneNumberForm />
+          </View>
+        </View>
+        <View>
+          <Text style={textAlignCenter}>{translate('vMessage')}</Text>
+        </View>
       </Box>
     </>
   );

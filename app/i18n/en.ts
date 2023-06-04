@@ -121,6 +121,7 @@ const en = {
         'No favorites have been added yet. Tap the heart on an episode to add it to your favorites!',
     },
   },
+  Contacts: 'Contacts',
   'Enter your phone number': 'Enter your phone number',
   'Enter your first name': 'Enter your first name',
   'Enter your last name': 'Enter your last name',
@@ -128,10 +129,15 @@ const en = {
   'First name': 'First name',
   'Input OTP': 'Input OTP',
   'Last name': 'Last name',
+  Messages: 'Messages',
   Next: 'Next',
   Password: 'Password',
   'Phone number': 'Phone number',
   'Phone number is not valid!': 'Phone number is not valid!',
+  'Please input the phone number to sign in':
+    'Please input the phone number to sign in',
+  'Please input the OTP code to sign in':
+    'Please input the OTP code to sign in',
   'Retype password': 'Retype password',
   'Sign in with phone number': 'Sign in with phone number',
   'Sign in': 'Sign in',

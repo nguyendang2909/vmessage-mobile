@@ -5,10 +5,17 @@ import { translate } from 'app/i18n';
 import { apiSlice } from 'app/stores/api.store';
 import { flexGrow } from 'app/styles/flex-grow';
 import { heightFull } from 'app/styles/height';
-import { justifyContentCenter } from 'app/styles/justifyContent';
-import { paddingHorizontal } from 'app/styles/padding';
+import { paddingHorizontal, paddingVertical } from 'app/styles/padding';
 import { spacing } from 'app/theme';
-import { Box, Button, ChevronLeftIcon, FormControl, HStack } from 'native-base';
+import {
+  Box,
+  Button,
+  ChevronLeftIcon,
+  FormControl,
+  HStack,
+  StatusBar,
+  Text,
+} from 'native-base';
 import React, { FC, useState } from 'react';
 import { Keyboard, Pressable, View } from 'react-native';
 
@@ -45,44 +52,52 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   };
 
   return (
-    <Box style={heightFull} safeAreaBottom>
-      <Pressable style={flexGrow} onPress={Keyboard.dismiss}>
-        <Header
-          textTx="Input OTP"
-          leftIcon={ChevronLeftIcon}
-          onPressLeftIcon={goBack}
-        ></Header>
-        <Box
-          style={[
-            flexGrow,
-            paddingHorizontal(spacing.small),
-            justifyContentCenter,
-          ]}
-        >
-          <HStack space="2" style={{ padding: spacing.large }}>
-            <FormControl isInvalid={isError}>
-              <OtpInput
-                code={otpCode}
-                setCode={setOTPCode}
-                maximumLength={maximumCodeLength}
-              />
-              <FormControl.ErrorMessage>
-                {isError && translate('Wrong OTP code, try again!')}
-              </FormControl.ErrorMessage>
-            </FormControl>
-          </HStack>
-          <View style={paddingHorizontal(spacing.large)}>
-            <Button
-              isLoading={isSubmiting}
-              disabled={otpCode.length !== 6}
-              testID="register-button"
-              onPress={handleSignUp}
-            >
-              {translate('Sign in')}
-            </Button>
+    <>
+      <StatusBar barStyle="light-content" />
+      <Box style={heightFull} safeAreaBottom>
+        <Pressable style={flexGrow} onPress={Keyboard.dismiss}>
+          <Header
+            textTx="Input OTP"
+            leftIcon={ChevronLeftIcon}
+            onPressLeftIcon={goBack}
+          ></Header>
+
+          <Box style={[flexGrow, paddingHorizontal(spacing.large)]}>
+            <View style={paddingVertical(spacing.large)}>
+              <Text>{translate('Please input the OTP code to sign in')}</Text>
+            </View>
+
+            <HStack space="2" style={paddingVertical(spacing.large)}>
+              <FormControl isInvalid={isError}>
+                <OtpInput
+                  code={otpCode}
+                  setCode={setOTPCode}
+                  maximumLength={maximumCodeLength}
+                />
+                <FormControl.ErrorMessage>
+                  {isError && translate('Wrong OTP code, try again!')}
+                </FormControl.ErrorMessage>
+              </FormControl>
+            </HStack>
+            {/* <View>
+              <Text>Resend OTP</Text>
+            </View> */}
+            <View style={paddingVertical(spacing.large)}>
+              <Button
+                isLoading={isSubmiting}
+                disabled={otpCode.length !== 6}
+                testID="register-button"
+                onPress={handleSignUp}
+              >
+                {translate('Sign in')}
+              </Button>
+            </View>
+          </Box>
+          <View>
+            <Text textAlign="center">{translate('vMessage')}</Text>
           </View>
-        </Box>
-      </Pressable>
-    </Box>
+        </Pressable>
+      </Box>
+    </>
   );
 };

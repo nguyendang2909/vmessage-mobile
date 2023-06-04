@@ -21,7 +21,6 @@ export const SignInScreen: FC<FCProps> = () => {
         justifyContent="space-between"
         alignItems="center"
         w="100%"
-        // maxW="350"
       >
         <Text color={colors.primary}>{translate('vMessage')}</Text>
       </HStack>
