@@ -1,9 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { translate } from 'app/i18n';
 import { AppStackScreenProps } from 'app/navigators';
+import { ContactsScreen } from 'app/screens/ContactsScreen';
 import { MessagesScreen } from 'app/screens/MessagesScreen';
+import { NotesScreen } from 'app/screens/NotesScreen';
+import { ProfileScreen } from 'app/screens/ProfileScreen';
 import { backgroundColor, borderTopColor } from 'app/styles';
-import { colors, spacing, typography } from 'app/theme';
+import { colors, spacing } from 'app/theme';
 import React, { FC } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -36,7 +39,6 @@ export const HomeNavigator: FC<FCProps> = () => {
         tabBarInactiveTintColor: colors.text,
         tabBarLabelStyle: {
           fontSize: 12,
-          fontFamily: typography.primary.medium,
           lineHeight: 16,
           flex: 1,
         },
@@ -61,7 +63,7 @@ export const HomeNavigator: FC<FCProps> = () => {
       />
       <Tab.Screen
         name="Contacts"
-        component={MessagesScreen}
+        component={ContactsScreen}
         options={{
           tabBarLabel: translate('Contacts'),
           tabBarIcon: ({ focused }) => (
@@ -75,7 +77,7 @@ export const HomeNavigator: FC<FCProps> = () => {
       />
       <Tab.Screen
         name="Notes"
-        component={MessagesScreen}
+        component={NotesScreen}
         options={{
           tabBarLabel: translate('Notes'),
           tabBarIcon: ({ focused }) => (
@@ -89,7 +91,7 @@ export const HomeNavigator: FC<FCProps> = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={MessagesScreen}
+        component={ProfileScreen}
         options={{
           tabBarLabel: translate('Profile'),
           tabBarIcon: ({ focused }) => (

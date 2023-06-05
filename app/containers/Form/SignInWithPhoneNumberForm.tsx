@@ -2,7 +2,7 @@ import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { translate, TxKeyPath } from 'app/i18n';
 import { phoneRegExp } from 'app/lib/validators';
-import { marginBottom, marginTop } from 'app/styles/margin';
+import { marginBottom, marginTop } from 'app/styles';
 import { spacing } from 'app/theme';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';

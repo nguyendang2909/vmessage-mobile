@@ -1,5 +1,5 @@
 import { translate, TxKeyPath } from 'app/i18n';
-import { alignItemsCenter } from 'app/styles/alignItems';
+import { alignItemsCenter } from 'app/styles';
 import { colors, spacing } from 'app/theme';
 import { Box, HStack, IconButton, Text, View } from 'native-base';
 import React, { FC } from 'react';

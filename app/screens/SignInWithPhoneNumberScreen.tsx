@@ -2,11 +2,14 @@ import { useNavigation } from '@react-navigation/native';
 import { Header } from 'app/components/Screen/Header';
 import { SignInWithPhoneNumberForm } from 'app/containers/Form/SignInWithPhoneNumberForm';
 import { translate } from 'app/i18n';
-import { flexGrow } from 'app/styles/flex-grow';
-import { heightFull } from 'app/styles/height';
-import { marginTop } from 'app/styles/margin';
-import { paddingHorizontal, paddingVertical } from 'app/styles/padding';
-import { textAlignCenter } from 'app/styles/text-align';
+import {
+  flexGrow,
+  heightFull,
+  marginTop,
+  paddingHorizontal,
+  paddingVertical,
+  textAlignCenter,
+} from 'app/styles';
 import { Box, ChevronLeftIcon, StatusBar, Text, View } from 'native-base';
 import React, { FC } from 'react';
 

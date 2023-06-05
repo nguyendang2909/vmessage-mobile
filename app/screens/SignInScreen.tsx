@@ -1,10 +1,12 @@
 import { SignInWithPhoneNumberButton } from 'app/containers/Button/SignInWithPhoneNumberButton';
 import { translate } from 'app/i18n';
 import { AppStackScreenProps } from 'app/navigators';
-import { heightFull } from 'app/styles/height';
-import { justifyContentCenter } from 'app/styles/justifyContent';
-import { marginTop } from 'app/styles/margin';
-import { paddingHorizontal } from 'app/styles/padding';
+import {
+  heightFull,
+  justifyContentCenter,
+  marginTop,
+  paddingHorizontal,
+} from 'app/styles';
 import { colors, spacing } from 'app/theme';
 import { Box, Button, HStack, Text, View } from 'native-base';
 import React, { FC } from 'react';

@@ -1,14 +1,14 @@
-import { alignItemsCenter } from 'app/styles/alignItems';
-import { flexDirectionRow } from 'app/styles/flexDirection';
-import { fontSize } from 'app/styles/font-size';
 import {
+  alignItemsCenter,
+  flexDirectionRow,
+  fontSize,
   justifyContentCenter,
   justifyContentSpaceEvenly,
-} from 'app/styles/justifyContent';
-import { opacity } from 'app/styles/opacity';
-import { posititionAbsolute } from 'app/styles/position';
-import { textAlignCenter } from 'app/styles/text-align';
-import { widthFull } from 'app/styles/width';
+  opacity,
+  posititionAbsolute,
+  textAlignCenter,
+  widthFull,
+} from 'app/styles';
 import { colors } from 'app/theme';
 import React, { FC, useRef, useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';

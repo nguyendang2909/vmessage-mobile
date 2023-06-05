@@ -3,9 +3,12 @@ import { OtpInput } from 'app/components/Input/OtpInput';
 import { Header } from 'app/components/Screen/Header';
 import { translate } from 'app/i18n';
 import { apiSlice } from 'app/stores/api.store';
-import { flexGrow } from 'app/styles/flex-grow';
-import { heightFull } from 'app/styles/height';
-import { paddingHorizontal, paddingVertical } from 'app/styles/padding';
+import {
+  flexGrow,
+  heightFull,
+  paddingHorizontal,
+  paddingVertical,
+} from 'app/styles';
 import { spacing } from 'app/theme';
 import {
   Box,
